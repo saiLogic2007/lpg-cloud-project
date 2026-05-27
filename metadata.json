@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: SafeGuard IoT: LPG Leakage Response System",
+  "description": "An advanced IoT-based safety system for real-time LPG gas detection, severity classification, and emergency community alerts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "Reading": {
+      "title": "Gas Reading",
+      "description": "A single sensor reading from an LPG detector.",
+      "type": "object",
+      "properties": {
+        "value": { "type": "number", "description": "Raw gas concentration value (0-1024 or ppm)" },
+        "percentage": { "type": "number", "description": "Derived risk percentage" },
+        "severity": { "type": "string", "enum": ["Safe", "Warning", "Danger", "Critical"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "deviceId": { "type": "string" }
+      },
+      "required": ["value", "percentage", "severity", "timestamp"]
+    },
+    "Alert": {
+      "title": "Emergency Alert",
+      "description": "An emergency event triggered by gas leakage.",
+      "type": "object",
+      "properties": {
+        "severity": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "message": { "type": "string" },
+        "neighborNotified": { "type": "boolean" },
+        "regulatorOffConfirmed": { "type": "boolean" }
+      },
+      "required": ["severity", "timestamp", "message"]
+    },
+    "Settings": {
+      "title": "Utility Settings",
+      "description": "User configuration for the alert system.",
+      "type": "object",
+      "properties": {
+        "emergencyContacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "phone": { "type": "string" },
+              "type": { "type": "string", "enum": ["Family", "Neighbor", "Security"] }
+            }
+          }
+        },
+        "criticalThreshold": { "type": "number" },
+        "voiceAlertsEnabled": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/readings/{readingId}": {
+      "schema": "Reading",
+      "description": "Historical gas sensor readings."
+    },
+    "/alerts/{alertId}": {
+      "schema": "Alert",
+      "description": "Log of emergency alerts triggered."
+    },
+    "/settings/{userId}": {
+      "schema": "Settings",
+      "description": "User-specific configuration and contacts."
+    }
+  }
+}
