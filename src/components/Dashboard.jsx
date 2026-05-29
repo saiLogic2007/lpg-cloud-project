@@ -238,7 +238,7 @@ export default function Dashboard() {
         speakVoiceWarning(`Critical incident detected. LPG gas levels register ${reading.value} PPM. Please evacuate the kitchen immediately.`);
       } else if (severity === "Danger") {
         speakVoiceWarning(`Danger. Gas leakage is high. The level is ${reading.value} PPM. Avoid sparks.`);
-      } else if (severity === "Warning") {
+      } else if (severity === "Warning") {https://lpg-cloud-project.onrender.com/api/twilio-status
         speakVoiceWarning(`Warning. Minor gas concentration detected.`);
       }
 
@@ -264,7 +264,7 @@ export default function Dashboard() {
   React.useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch("/api/history");
+        const res = await fetch("https://lpg-cloud-project.onrender.com/api/history");
         if (res.ok) {
           const data = await res.json();
           setHistory(data);
@@ -279,7 +279,7 @@ export default function Dashboard() {
 
     const fetchTwilioStatus = async () => {
       try {
-        const res = await fetch("/api/twilio-status");
+        const res = await fetch("");
         if (res.ok) {
           const data = await res.json();
           const localSid = typeof window !== 'undefined' ? localStorage.getItem('safeguard_twilio_account_sid') : '';
@@ -844,7 +844,7 @@ https://maps.google.com/?q=${activeLat},${activeLng}`;
                       <div className="p-3 bg-blue-500/5 border border-blue-500/10 rounded-xl space-y-1">
                          <span className="text-[9px] font-mono leading-none font-bold uppercase text-blue-500">Node Ingress Payload Endpoint:</span>
                          <code className="block p-1 bg-background select-all border rounded text-[9px] font-mono whitespace-nowrap overflow-x-auto">
-                          POST  https://lpg-cloud-project.onrender.com/api/sensor-data
+                         "https://lpg-cloud-project.onrender.com/https://lpg-cloud-project.onrender.com"
                          </code>
                       </div>
                     </div>
