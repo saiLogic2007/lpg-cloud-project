@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import dotenv from "dotenv";
 import twilio from "twilio";
+import cors from "cors";
 
 dotenv.config();
 
@@ -11,6 +12,11 @@ async function startServer() {
   const PORT = 3000;
 
   app.use(express.json());
+  app.use(cors({
+  origin: "https://lpg-cloud-project.vercel.app",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 
   // SSE Clients
   let clients = [];
@@ -266,11 +272,11 @@ longitude: 80.6913302784681
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    //const distPath = path.join(process.cwd(), 'dist');
+    //app.use(express.static(distPath));
+    //app.get('*', (req, res) => {
+    //  res.sendFile(path.join(distPath, 'index.html'));
+   // });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
