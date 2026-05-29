@@ -539,7 +539,7 @@ https://maps.google.com/?q=${activeLat},${activeLng}`;
     // Process dispatches through real Twilio API route
     for (const dispatch of smsDispatches) {
       try {
-        const response = await fetch("/api/send-sms", {
+        const response = await fetch("https://lpg-cloud-project.onrender.com/api/send-sms", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
