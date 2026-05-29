@@ -14,8 +14,8 @@ export const Simulator = () => {
   const [isActive, setIsActive] = React.useState(true); // Active by default for rich live view
   
   // Simulated GPS Coordinates for NEO-6M verification
-  const [latitude, setLatitude] = React.useState(13.7563);
-  const [longitude, setLongitude] = React.useState(100.5018);
+  const [latitude, setLatitude] = React.useState(16.482372983354427);
+  const [longitude, setLongitude] = React.useState(80.6913302784681);
 
   // Jitter and simulation interval to recreate realistic air drift
   React.useEffect(() => {
