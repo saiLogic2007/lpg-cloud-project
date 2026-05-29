@@ -51,8 +51,8 @@ export default function Dashboard() {
     percentage: 0,
     severity: "Safe",
     timestamp: new Date().toISOString(),
-    latitude: 13.7563,
-    longitude: 100.5018
+    latitude: 16.482372983354427,
+    longitude: 80.6913302784681
   });
   
   const [history, setHistory] = React.useState([]);
@@ -307,7 +307,7 @@ export default function Dashboard() {
     let eventSource;
 
     const setupStream = () => {
-      eventSource = new EventSource("/api/stream");
+     eventSource = new EventSource("https://lpg-cloud-project.onrender.com/api/stream");
 
       eventSource.onopen = () => {
         setIsLive(true);
