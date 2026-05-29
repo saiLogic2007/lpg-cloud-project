@@ -147,47 +147,48 @@ longitude: 80.6913302784681
     }
 
     try {
-      // Automatic detection and format handling for Twilio WhatsApp Gateway
-      let formattedFrom = fromNumber;
-      let formattedTo = phone;
+  // Automatic detection and format handling for Twilio WhatsApp Gateway
+  let formattedFrom = fromNumber;
+  let formattedTo = phone;
 
-      formattedTo = formattedTo.trim();
+  formattedTo = formattedTo.trim();
 
-      // Automatically add India country code if missing
-      if (!formattedTo.startsWith("+")) {
-        formattedTo = "+91" + formattedTo;
-      }
+  // Automatically add India country code if missing
+  if (!formattedTo.startsWith("+")) {
+    formattedTo = "+91" + formattedTo;
+  }
 
-      // Automatically convert to Twilio WhatsApp format
-      if (formattedFrom.startsWith("whatsapp:")) {
-        if (!formattedTo.startsWith("whatsapp:")) {
-          formattedTo = "whatsapp:" + formattedTo;
-        }
-      }
+  console.log("Sending WhatsApp to:", formattedTo);
+  console.log("FROM:", formattedFrom);
+  console.log("TO:", formattedTo);
 
-      console.log("Sending WhatsApp to:", formattedTo);
+  // Initialize Twilio client
+  const client = twilio(accountSid, authToken);
 
-      // Lazy initialization of the Twilio client
-     const twilioMsg = await client.messages.create({
-  body: message,
-  from: `whatsapp:${formattedFrom}`,
-  to: `whatsapp:${formattedTo}`
-});
+  // Send WhatsApp message
+  const twilioMsg = await client.messages.create({
+    body: message,
+    from: `whatsapp:${formattedFrom.replace("whatsapp:", "")}`,
+    to: `whatsapp:${formattedTo.replace("whatsapp:", "")}`
+  });
 
-      console.log(`Twilio SMS sent successfully. SID: ${twilioMsg.sid}`);
-      return res.json({
-        success: true,
-        status: "Delivered",
-        sid: twilioMsg.sid
-      });
-    } catch (err) {
-      console.error("Twilio SMS transmission failed:", err);
-      return res.status(500).json({
-        success: false,
-        error: "TransmissionFailed",
-        message: err.message || "Twilio gateway failed to deliver the SMS."
-      });
-    }
+  console.log(`Twilio WhatsApp sent successfully. SID: ${twilioMsg.sid}`);
+
+  return res.json({
+    success: true,
+    status: "Delivered",
+    sid: twilioMsg.sid
+  });
+
+} catch (err) {
+  console.error("Twilio WhatsApp transmission failed:", err);
+
+  return res.status(500).json({
+    success: false,
+    error: "TransmissionFailed",
+    message: err.message || "Twilio gateway failed to deliver the WhatsApp message."
+  });
+}
   });
 
   // API to send real WhatsApp alerts via CallMeBot
