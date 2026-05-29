@@ -844,7 +844,7 @@ https://maps.google.com/?q=${activeLat},${activeLng}`;
                       <div className="p-3 bg-blue-500/5 border border-blue-500/10 rounded-xl space-y-1">
                          <span className="text-[9px] font-mono leading-none font-bold uppercase text-blue-500">Node Ingress Payload Endpoint:</span>
                          <code className="block p-1 bg-background select-all border rounded text-[9px] font-mono whitespace-nowrap overflow-x-auto">
-                           POST {window.location.origin}/api/sensor-data
+                          POST  https://lpg-cloud-project.onrender.com/api/sensor-data
                          </code>
                       </div>
                     </div>
