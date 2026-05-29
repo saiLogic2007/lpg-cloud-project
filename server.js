@@ -168,12 +168,11 @@ longitude: 80.6913302784681
       console.log("Sending WhatsApp to:", formattedTo);
 
       // Lazy initialization of the Twilio client
-      const client = twilio(accountSid, authToken);
-      const twilioMsg = await client.messages.create({
-        body: message,
-        from: formattedFrom,
-        to: formattedTo
-      });
+     const twilioMsg = await client.messages.create({
+  body: message,
+  from: `whatsapp:${formattedFrom}`,
+  to: `whatsapp:${formattedTo}`
+});
 
       console.log(`Twilio SMS sent successfully. SID: ${twilioMsg.sid}`);
       return res.json({
